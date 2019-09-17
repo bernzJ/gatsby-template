@@ -62,6 +62,7 @@ module.exports = {
         icon: `${__dirname}/src/services/assets/gatsby-icon.png`,
       },
     },
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-catch-links`

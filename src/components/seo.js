@@ -9,7 +9,7 @@ const enhance = compose(
   connect((state) => ({ ...state }))
 )
 
-export default enhance(({ tags, title, siteMetadataReducer: { site } }) => {
+export default enhance(({ tags, title, description, siteMetadataReducer: { site } }) => {
   return (
     <Helmet
       htmlAttributes={{
@@ -20,7 +20,7 @@ export default enhance(({ tags, title, siteMetadataReducer: { site } }) => {
       meta={[
         {
           name: `description`,
-          content: site.description,
+          content: description || site.description,
         },
         {
           property: `title`,

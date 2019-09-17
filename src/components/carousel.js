@@ -1,5 +1,6 @@
 import React from "react"
 import Img from "gatsby-image"
+import styled from "styled-components"
 import { compose, withStateHandlers, branch, renderNothing } from "recompose"
 import { connect } from "react-redux"
 import {
@@ -11,8 +12,13 @@ import {
     Container,
     Row
 } from "reactstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBars } from "@fortawesome/free-solid-svg-icons"
+
+const ABSDiv = styled.div`
+position: absolute;
+top: 0;
+width: 100%;
+height: 100%;
+`;
 
 // NOTE: we are not using a reducer to store the carousel values as they may change so refreshing on each page seems like the proper move.
 const enhance = compose(
@@ -52,6 +58,7 @@ export default enhance(({ items, activeIndex, setActiveIndex }) => {
         <Container fluid={true}>
             <Row>
                 <Carousel
+                    pause={false}
                     activeIndex={activeIndex}
                     next={next}
                     previous={prev}
@@ -65,9 +72,9 @@ export default enhance(({ items, activeIndex, setActiveIndex }) => {
                                 key={key}
                             >
                                 <Img style={{ maxHeight: item.childImageSharp.presentationHeight }} alt={item.altText} fluid={item.childImageSharp.fluid} backgroundColor={item.imageColor} />
-                                <CarouselCaption className="carousel-control-custom" captionText={item.altText} captionHeader={item.caption} />
-                                <div dangerouslySetInnerHTML={({ __html: item.jsxDom })}>
-                                </div>
+                                <CarouselCaption captionText={item.altText} captionHeader={item.caption} />
+                                <ABSDiv dangerouslySetInnerHTML={({ __html: item.jsxDom })}>
+                                </ABSDiv>
                             </CarouselItem>
                         );
                     })}
